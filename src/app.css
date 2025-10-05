@@ -64,17 +64,17 @@ button, input, select, textarea {
 	:root { font-size: 15px; }
 	h1 { font-size: 1.125rem; }
 }
-/* Extra mobile readability boost */
+/* 🔹 Dramatically larger text on mobile for readability */
 @media (max-width: 480px) {
 	body {
-		font-size: 1.1rem; /* padidina bendrą tekstą apie 10% */
-		line-height: 1.6;
+		font-size: 1.4rem; /* buvo 1.1rem – dabar 40% didesnis tekstas */
+		line-height: 1.7;
 	}
 
-	input, select, button, label {
-		font-size: 1.05rem;
+	input, select, button, label, p, span, div {
+		font-size: 1.3rem; /* didesnis visur, kur tekstas */
 	}
 
-	h1 { font-size: 1.5rem; }
-	h2 { font-size: 1.25rem; }
+	h1 { font-size: 2rem; font-weight: 700; }
+	h2 { font-size: 1.6rem; }
 }
