@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* iPhone / mobile safe area and small-screen tweaks */
+:root {
+	/* expose safe area insets as CSS variables for use in components */
+	--safe-area-inset-top: env(safe-area-inset-top);
+	--safe-area-inset-right: env(safe-area-inset-right);
+	--safe-area-inset-bottom: env(safe-area-inset-bottom);
+	--safe-area-inset-left: env(safe-area-inset-left);
+}
+
+/* Ensure the app background extends under rounded corners and status bar on iPhone */
+html, body, #svelte {
+	height: 100%;
+	background-color: #f3f4f6;
+}
+
+/* Use safe-area padding on the main app container if present */
+.app-container {
+	padding-top: constant(safe-area-inset-top); /* legacy iOS */
+	padding-right: constant(safe-area-inset-right);
+	padding-bottom: constant(safe-area-inset-bottom);
+	padding-left: constant(safe-area-inset-left);
+
+	padding-top: env(safe-area-inset-top);
+	padding-right: env(safe-area-inset-right);
+	padding-bottom: env(safe-area-inset-bottom);
+	padding-left: env(safe-area-inset-left);
+}
+
+/* Mobile touch optimizations */
+button, input, select, textarea {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	touch-action: manipulation;
+}
+
+/* Small screen adjustments: slightly larger tap targets and stacked layout */
+@media (max-width: 420px) {
+	:root {
+		font-size: 16px; /* base for rems on small screens */
+	}
+
+	.container {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	/* make inputs and buttons a bit taller on iPhone for easier tapping */
+	input, select, textarea, button {
+		padding: 0.75rem 0.875rem;
+		font-size: 1rem;
+	}
+
+	/* ensure headers fit on narrow screens */
+	h1 { font-size: 1.25rem; }
+	h2 { font-size: 1rem; }
+}
+
+/* Additional very small screen tweaks (e.g., iPhone SE) */
+@media (max-width: 360px) {
+	:root { font-size: 15px; }
+	h1 { font-size: 1.125rem; }
+}
