@@ -47,7 +47,7 @@
 <section class="space-y-5">
 	<!-- Panel selector -->
 	<div class="bg-white p-5 rounded-2xl shadow-md">
-		<span class="font-semibold text-gray-700 mb-1 block">LED Panel Type:</span>
+		<label for="panelSelect" class="font-semibold text-gray-700 mb-1 block">LED Panel Type:</label>
 		<select
 			id="panelSelect"
 			bind:value={selected}
