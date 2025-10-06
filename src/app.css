@@ -65,6 +65,11 @@ button, input, select, textarea {
 		line-height: 1.7 !important;
 	}
 
+	body * {
+		font-size: 2rem !important;
+		line-height: 1.5 !important;
+	}
+
 	h1, h2, h3, h4, h5, h6, p, span, div, label, input, button, select, textarea, li, a {
 		font-size: 2rem !important;
 		line-height: 1.5 !important;
