@@ -29,7 +29,7 @@
 	$: totalArea = totalWidthM * totalHeightM;
 
 	// power and weight
-	$: totalPower = totalArea * selected.power;
+	$: totalPower = totalPanels * selected.power;
 	$: totalWeight = totalPanels * selected.weightKg;
 
 	// smart formatting
