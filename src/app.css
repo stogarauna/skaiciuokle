@@ -59,22 +59,28 @@ button, input, select, textarea {
 	h2 { font-size: 1rem; }
 }
 
-/* Additional very small screen tweaks (e.g., iPhone SE) */
-@media (max-width: 360px) {
-	:root { font-size: 15px; }
-	h1 { font-size: 1.125rem; }
-}
-/* 🔹 Dramatically larger text on mobile for readability */
+/* 🔹 Force much larger text on mobile (Tailwind override safe) */
 @media (max-width: 480px) {
-	body {
-		font-size: 1.4rem; /* buvo 1.1rem – dabar 40% didesnis tekstas */
-		line-height: 1.7;
+	html, body {
+		font-size: 20px !important; /* +25–30% bazinis šrifto dydis */
+		line-height: 1.7 !important;
+	}
+
+	h1 {
+		font-size: 2rem !important;
+		font-weight: 700 !important;
+	}
+
+	h2 {
+		font-size: 1.6rem !important;
 	}
 
 	input, select, button, label, p, span, div {
-		font-size: 1.3rem; /* didesnis visur, kur tekstas */
+		font-size: 1.25rem !important;
 	}
 
-	h1 { font-size: 2rem; font-weight: 700; }
-	h2 { font-size: 1.6rem; }
+	/* Kad mobilieji laukeliai būtų dar patogesni */
+	input, button, select {
+		padding: 1rem 1rem !important;
+	}
 }
