@@ -47,18 +47,16 @@
 <section class="space-y-5">
 	<!-- Panel selector -->
 	<div class="bg-white p-5 rounded-2xl shadow-md">
-		<div class="flex flex-col">
-			<span class="font-semibold text-gray-700 mb-1">LED Panel Type:</span>
-			<select
-				id="panelSelect"
-				bind:value={selected}
-				class="w-full border border-gray-300 rounded-xl p-3 text-gray-700 focus:ring-2 focus:ring-blue-500"
-			>
-				{#each panels as panel}
-					<option value={panel}>{panel.name}</option>
-				{/each}
-			</select>
-		</div>
+		<span class="font-semibold text-gray-700 mb-1 block">LED Panel Type:</span>
+		<select
+			id="panelSelect"
+			bind:value={selected}
+			class="w-full border border-gray-300 rounded-xl p-3 text-gray-700 focus:ring-2 focus:ring-blue-500"
+		>
+			{#each panels as panel}
+				<option value={panel}>{panel.name}</option>
+			{/each}
+		</select>
 	</div>
 
 	<!-- Size inputs -->
