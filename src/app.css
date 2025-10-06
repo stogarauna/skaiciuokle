@@ -40,9 +40,7 @@ button, input, select, textarea {
 
 /* Small screen adjustments: slightly larger tap targets and stacked layout */
 @media (max-width: 420px) {
-	:root {
-		font-size: 16px; /* base for rems on small screens */
-	}
+
 
 	.container {
 		padding-left: 1rem;
@@ -63,7 +61,7 @@ button, input, select, textarea {
 /* 🔹 Force much larger text on mobile (Tailwind override safe) */
 @media (max-width: 480px) {
 	html, body {
-		font-size: 20px !important; /* +25–30% bazinis šrifto dydis */
+		font-size: 24px !important; /* Didesnis bazinis šrifto dydis mobiliesiems */
 		line-height: 1.7 !important;
 	}
 
