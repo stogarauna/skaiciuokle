@@ -75,7 +75,7 @@
 					min="1"
 					bind:value={width}
 					on:input={e => width = Math.max(1, parseInt(e.target.value) || 1)}
-					class="w-full border border-gray-300 rounded-xl p-3 text-center text-lg focus:ring-2 focus:ring-blue-500"
+					class="w-20 border border-gray-300 rounded-xl p-3 text-center text-lg focus:ring-2 focus:ring-blue-500"
 				/>
 				<button type="button" aria-label="Increase width" class="w-10 h-10 rounded-full bg-gray-200 text-2xl flex items-center justify-center select-none active:bg-gray-300" on:click={() => width = width + 1}>+</button>
 			</div>
@@ -93,7 +93,7 @@
 					min="1"
 					bind:value={height}
 					on:input={e => height = Math.max(1, parseInt(e.target.value) || 1)}
-					class="w-full border border-gray-300 rounded-xl p-3 text-center text-lg focus:ring-2 focus:ring-blue-500"
+					class="w-20 border border-gray-300 rounded-xl p-3 text-center text-lg focus:ring-2 focus:ring-blue-500"
 				/>
 				<button type="button" aria-label="Increase height" class="w-10 h-10 rounded-full bg-gray-200 text-2xl flex items-center justify-center select-none active:bg-gray-300" on:click={() => height = height + 1}>+</button>
 			</div>
