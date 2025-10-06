@@ -16,6 +16,7 @@
 html, body, #svelte {
 	height: 100%;
 	background-color: #f3f4f6;
+    font-size: 22px;
 }
 
 /* Use safe-area padding on the main app container if present */
