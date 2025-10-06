@@ -2,8 +2,8 @@
 	import { panels } from "../lib/data/panels.js";
 
 	let selected = panels[0];
-	let width = 5;
-	let height = 3;
+	let width = 1;
+	let height = 1;
 
 	// derived values
 	$: totalPanels = width * height;
