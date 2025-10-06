@@ -67,26 +67,34 @@
 			<label for="widthInput" class="block mb-1 text-sm font-semibold text-gray-700">
 				Width (panels)
 			</label>
-			<input
-				id="widthInput"
-				type="number"
-				min="1"
-				bind:value={width}
-				class="w-full border border-gray-300 rounded-xl p-3 text-center text-lg focus:ring-2 focus:ring-blue-500"
-			/>
+			<div class="flex items-center gap-2">
+				<button type="button" aria-label="Decrease width" class="w-10 h-10 rounded-full bg-gray-200 text-2xl flex items-center justify-center select-none active:bg-gray-300" on:click={() => width = Math.max(1, width - 1)}>-</button>
+				<input
+					id="widthInput"
+					type="number"
+					min="1"
+					bind:value={width}
+					class="w-full border border-gray-300 rounded-xl p-3 text-center text-lg focus:ring-2 focus:ring-blue-500"
+				/>
+				<button type="button" aria-label="Increase width" class="w-10 h-10 rounded-full bg-gray-200 text-2xl flex items-center justify-center select-none active:bg-gray-300" on:click={() => width = width + 1}>+</button>
+			</div>
 		</div>
 
 		<div>
 			<label for="heightInput" class="block mb-1 text-sm font-semibold text-gray-700">
 				Height (panels)
 			</label>
-			<input
-				id="heightInput"
-				type="number"
-				min="1"
-				bind:value={height}
-				class="w-full border border-gray-300 rounded-xl p-3 text-center text-lg focus:ring-2 focus:ring-blue-500"
-			/>
+			<div class="flex items-center gap-2">
+				<button type="button" aria-label="Decrease height" class="w-10 h-10 rounded-full bg-gray-200 text-2xl flex items-center justify-center select-none active:bg-gray-300" on:click={() => height = Math.max(1, height - 1)}>-</button>
+				<input
+					id="heightInput"
+					type="number"
+					min="1"
+					bind:value={height}
+					class="w-full border border-gray-300 rounded-xl p-3 text-center text-lg focus:ring-2 focus:ring-blue-500"
+				/>
+				<button type="button" aria-label="Increase height" class="w-10 h-10 rounded-full bg-gray-200 text-2xl flex items-center justify-center select-none active:bg-gray-300" on:click={() => height = height + 1}>+</button>
+			</div>
 		</div>
 	</div>
 
