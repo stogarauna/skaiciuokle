@@ -57,9 +57,9 @@ button, input, select, textarea {
 	}
 	/* Didelis tekstas mobiliesiems – paprastas ir stiprus selektorius */
 @media (max-width: 600px) {
-  body, body * {
-    font-size: 2rem !important;
-    line-height: 1.5 !important;
-  }
+	:root, html, body, body * {
+		font-size: 2.2rem !important;
+		line-height: 1.5 !important;
+	}
 }
 }
