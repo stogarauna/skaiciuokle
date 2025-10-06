@@ -1,4 +1,4 @@
-<header class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center py-4 text-2xl font-semibold shadow-md">
+<header class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center py-4 font-semibold shadow-md">
 	Skaičiuoklė
 </header>
 
@@ -7,7 +7,7 @@
 		<slot />
 	</div>
 
-	<footer class="text-center text-sm text-gray-500 mt-6">
+	<footer class="text-center text-gray-500 mt-6">
 		LED Skaičiuoklė © 2025
 	</footer>
 </main>

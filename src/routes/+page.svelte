@@ -47,7 +47,7 @@
 <section class="space-y-5">
 	<!-- Panel selector -->
 	<div class="bg-white p-5 rounded-2xl shadow-md">
-		<label for="panelSelect" class="block mb-2 text-sm font-semibold text-gray-700">
+	<label for="panelSelect" class="block mb-2 font-semibold text-gray-700">
 			LED Panel Type
 		</label>
 		<select
@@ -64,55 +64,55 @@
 	<!-- Size inputs -->
 	<div class="bg-white p-5 rounded-2xl shadow-md grid grid-cols-2 gap-4">
 		<div>
-			<label for="widthInput" class="block mb-1 text-sm font-semibold text-gray-700">
+			<label for="widthInput" class="block mb-1 font-semibold text-gray-700">
 				Width (panels)
 			</label>
 			<div class="flex items-center gap-2">
-				<button type="button" aria-label="Decrease width" class="w-10 h-10 rounded-full bg-gray-200 text-2xl flex items-center justify-center select-none active:bg-gray-300" on:click={() => width = Math.max(1, width - 1)}>-</button>
+				<button type="button" aria-label="Decrease width" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => width = Math.max(1, width - 1)}>-</button>
 				<input
 					id="widthInput"
 					type="number"
 					min="1"
 					bind:value={width}
 					on:input={e => width = Math.max(1, parseInt(e.target.value) || 1)}
-					class="border border-gray-300 rounded-xl p-3 text-center text-lg focus:ring-2 focus:ring-blue-500"
+					class="border border-gray-300 rounded-xl p-3 text-center focus:ring-2 focus:ring-blue-500"
 					style="width: 4.5rem; min-width: 0;"
 				/>
-				<button type="button" aria-label="Increase width" class="w-10 h-10 rounded-full bg-gray-200 text-2xl flex items-center justify-center select-none active:bg-gray-300" on:click={() => width = width + 1}>+</button>
+				<button type="button" aria-label="Increase width" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => width = width + 1}>+</button>
 			</div>
 		</div>
 
 		<div>
-			<label for="heightInput" class="block mb-1 text-sm font-semibold text-gray-700">
+			<label for="heightInput" class="block mb-1 font-semibold text-gray-700">
 				Height (panels)
 			</label>
 			<div class="flex items-center gap-2">
-				<button type="button" aria-label="Decrease height" class="w-10 h-10 rounded-full bg-gray-200 text-2xl flex items-center justify-center select-none active:bg-gray-300" on:click={() => height = Math.max(1, height - 1)}>-</button>
+				<button type="button" aria-label="Decrease height" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => height = Math.max(1, height - 1)}>-</button>
 				<input
 					id="heightInput"
 					type="number"
 					min="1"
 					bind:value={height}
 					on:input={e => height = Math.max(1, parseInt(e.target.value) || 1)}
-					class="border border-gray-300 rounded-xl p-3 text-center text-lg focus:ring-2 focus:ring-blue-500"
+					class="border border-gray-300 rounded-xl p-3 text-center focus:ring-2 focus:ring-blue-500"
 					style="width: 4.5rem; min-width: 0;"
 				/>
-				<button type="button" aria-label="Increase height" class="w-10 h-10 rounded-full bg-gray-200 text-2xl flex items-center justify-center select-none active:bg-gray-300" on:click={() => height = height + 1}>+</button>
+				<button type="button" aria-label="Increase height" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => height = height + 1}>+</button>
 			</div>
 		</div>
 	</div>
 
 	<!-- Results -->
 	<div class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-5 rounded-2xl shadow-md space-y-2">
-		<p class="text-lg"><strong>Total Panels:</strong> {totalPanels}</p>
-		<p class="text-lg"><strong>Resolution:</strong> {resolutionText}</p>
-		<p class="text-lg"><strong>Aspect Ratio:</strong> {aspectRatio}</p>
-		<p class="text-lg"><strong>Total Pixels:</strong> {totalPixels.toLocaleString()}</p>
-		<p class="text-lg">
+		<p><strong>Total Panels:</strong> {totalPanels}</p>
+		<p><strong>Resolution:</strong> {resolutionText}</p>
+		<p><strong>Aspect Ratio:</strong> {aspectRatio}</p>
+		<p><strong>Total Pixels:</strong> {totalPixels.toLocaleString()}</p>
+		<p>
 			<strong>Wall Size:</strong> {totalWidthM.toFixed(2)} m × {totalHeightM.toFixed(2)} m
 		</p>
-		<p class="text-lg"><strong>Total Area:</strong> {totalArea.toFixed(2)} m²</p>
-		<p class="text-lg"><strong>Total Power:</strong> {powerDisplay}</p>
-		<p class="text-lg"><strong>Total Weight:</strong> {weightDisplay}</p>
+		<p><strong>Total Area:</strong> {totalArea.toFixed(2)} m²</p>
+		<p><strong>Total Power:</strong> {powerDisplay}</p>
+		<p><strong>Total Weight:</strong> {weightDisplay}</p>
 	</div>
 </section>
