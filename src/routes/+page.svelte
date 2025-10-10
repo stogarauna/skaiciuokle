@@ -1,19 +1,19 @@
 <script>
 	import { panels } from "../lib/data/panels.js";
+	import { selectedIndex, width, height } from "$lib/stores";
 
-	let selected = panels[0];
-	let width = 1;
-	let height = 1;
+	// derive selected panel from the selectedIndex store
+	$: selected = panels[$selectedIndex];
 
-	// derived values
-	$: totalPanels = width * height;
+	// derived values using store values
+	$: totalPanels = $width * $height;
 
 	// total resolution
-	$: totalWidthPx = width * selected.resX;
-	$: totalHeightPx = height * selected.resY;
+	$: totalWidthPx = $width * selected.resX;
+	$: totalHeightPx = $height * selected.resY;
 	$: resolutionText = `${totalWidthPx} × ${totalHeightPx}`;
 
-	// aspect ratio
+	// aspect ratio helper
 	function gcd(a, b) {
 		return b === 0 ? a : gcd(b, a % b);
 	}
@@ -24,8 +24,8 @@
 	$: totalPixels = totalWidthPx * totalHeightPx;
 
 	// physical dimensions
-	$: totalWidthM = width * selected.widthM;
-	$: totalHeightM = height * selected.heightM;
+	$: totalWidthM = $width * selected.widthM;
+	$: totalHeightM = $height * selected.heightM;
 	$: totalArea = totalWidthM * totalHeightM;
 
 	// power and weight
@@ -51,11 +51,12 @@
 			<label for="panelSelect" class="font-semibold text-gray-700 mb-1" style="display:block">LED Panel Type:</label>
 			<select
 				id="panelSelect"
-				bind:value={selected}
+				value={$selectedIndex}
+				on:change={e => selectedIndex.set(parseInt(e.target.value))}
 				class="w-full border border-gray-300 rounded-xl p-3 text-gray-700 focus:ring-2 focus:ring-blue-500"
 			>
-				{#each panels as panel}
-					<option value={panel}>{panel.name}</option>
+				{#each panels as panel, i}
+					<option value={i}>{panel.name}</option>
 				{/each}
 			</select>
 		</div>
@@ -68,17 +69,17 @@
 				Width (panels)
 			</label>
 			<div class="flex items-center gap-2">
-				<button type="button" aria-label="Decrease width" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => width = Math.max(1, width - 1)}>-</button>
+				<button type="button" aria-label="Decrease width" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => width.set(Math.max(1, $width - 1))}>-</button>
 				<input
 					id="widthInput"
 					type="number"
 					min="1"
-					bind:value={width}
-					on:input={e => width = Math.max(1, parseInt(e.target.value) || 1)}
+					value={$width}
+					on:input={e => width.set(Math.max(1, parseInt(e.target.value) || 1))}
 					class="border border-gray-300 rounded-xl p-3 text-center focus:ring-2 focus:ring-blue-500"
 					style="width: 4.5rem; min-width: 0;"
 				/>
-				<button type="button" aria-label="Increase width" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => width = width + 1}>+</button>
+				<button type="button" aria-label="Increase width" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => width.set($width + 1)}>+</button>
 			</div>
 		</div>
 
@@ -87,17 +88,17 @@
 				Height (panels)
 			</label>
 			<div class="flex items-center gap-2">
-				<button type="button" aria-label="Decrease height" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => height = Math.max(1, height - 1)}>-</button>
+				<button type="button" aria-label="Decrease height" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => height.set(Math.max(1, $height - 1))}>-</button>
 				<input
 					id="heightInput"
 					type="number"
 					min="1"
-					bind:value={height}
-					on:input={e => height = Math.max(1, parseInt(e.target.value) || 1)}
+					value={$height}
+					on:input={e => height.set(Math.max(1, parseInt(e.target.value) || 1))}
 					class="border border-gray-300 rounded-xl p-3 text-center focus:ring-2 focus:ring-blue-500"
 					style="width: 4.5rem; min-width: 0;"
 				/>
-				<button type="button" aria-label="Increase height" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => height = height + 1}>+</button>
+				<button type="button" aria-label="Increase height" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center select-none active:bg-gray-300" on:click={() => height.set($height + 1)}>+</button>
 			</div>
 		</div>
 	</div>
