@@ -82,37 +82,38 @@
 
   <!-- Model info card -->
   <div class="bg-white p-5 rounded-2xl shadow-md">
-    <!-- processor selection and computed limits (moved above model info) -->
-    <div class="bg-white p-5 rounded-2xl shadow-md grid grid-cols-1 gap-4 mb-4">
-      <div class="flex items-center gap-2">
-        <label for="processorSelect" class="block mb-1 font-semibold">Processor:</label>
+    <h3 class="font-semibold mb-2">Selected LED Model</h3>
+    <div class="text-sm text-gray-700 space-y-1">
+      <div><strong>Name:</strong> {selected.name}</div>
+      <div><strong>Max panels per port (by resolution):</strong> {limits.maxPanelsPerPortByResolution}</div>
+      <div><strong>Max panels per port (by power):</strong> {maxPanelsPerPortByPower}</div>
+      <div><strong>Resolution / panel:</strong> {selected.resX} × {selected.resY} px</div>
+      <div><strong>Total resolution:</strong> {totalWidthPx} × {totalHeightPx} px</div>
+      <div><strong>Power / panel:</strong> {selected.power} W</div>
+      <div><strong>Weight / panel:</strong> {selected.weightKg} kg</div>
+    </div>
+  </div>
+
+  <!-- Per-port power and processor selection -->
+  <div class="bg-white p-5 rounded-2xl shadow-md grid grid-cols-1 gap-4">
+    <div class="flex items-center gap-4">
+      <div>
+        <label for="perPortPower" class="block mb-1 font-semibold">Per-port power (W)</label>
+        <input id="perPortPower" type="number" class="border rounded p-1 w-32" bind:value={perPortPowerW} />
+      </div>
+
+      <div>
+        <label for="processorSelect" class="block mb-1 font-semibold">Processor</label>
         <select id="processorSelect" class="border rounded p-2" value={processorIndex} on:change={e => processorIndex = parseInt(e.target.value)}>
           {#each processors as proc, i}
             <option value={i}>{proc.name} (ports: {proc.portNumber})</option>
           {/each}
         </select>
-        <div class="ml-4">
-          <label for="perPortPower" class="block text-sm">Per-port power (W)</label>
-          <input id="perPortPower" type="number" class="border rounded p-1 w-32" bind:value={perPortPowerW} />
-        </div>
-      </div>
-
-      <div class="mt-3 text-sm text-gray-700">
-        <div><strong>Processor max resolution:</strong> {processor.maxResX} × {processor.maxResY}</div>
-        <div><strong>Max panels per port (by resolution):</strong> {limits.maxPanelsPerPortByResolution}</div>
-        <div><strong>Max panels per port (by power):</strong> {maxPanelsPerPortByPower}</div>
       </div>
     </div>
 
-    <h3 class="font-semibold mb-2">Selected LED Model</h3>
-    <div class="text-sm text-gray-700 space-y-1">
-      <div><strong>Name:</strong> {selected.name}</div>
-      <div><strong>Resolution / panel:</strong> {selected.resX} × {selected.resY} px</div>
-      <div><strong>Total resolution:</strong> {totalWidthPx} × {totalHeightPx} px</div>
-      <div><strong>Total pixels:</strong> {totalPixels.toLocaleString()}</div>
-      <div><strong>Panel size:</strong> {selected.widthM} m × {selected.heightM} m</div>
-      <div><strong>Power / panel:</strong> {selected.power} W</div>
-      <div><strong>Weight / panel:</strong> {selected.weightKg} kg</div>
+    <div class="mt-3 text-sm text-gray-700">
+      <div><strong>Processor max resolution:</strong> {processor.maxResX} × {processor.maxResY}</div>
     </div>
   </div>
 
