@@ -33,6 +33,8 @@
   $: totalPixels = totalWidthPx * totalHeightPx;
   $: totalPanels = $width * $height;
   $: totalPower = totalPanels * selected.power;
+  // ports needed (total pixels divided by per-port pixel budget)
+  $: portsNeeded = Math.ceil(totalPixels / Math.max(1, perPortPixelBudget));
 
   function exportCSV() {
     const rows = [
@@ -89,8 +91,9 @@
       <div><strong>Max panels per port (by power):</strong> {maxPanelsPerPortByPower}</div>
       <div><strong>Resolution / panel:</strong> {selected.resX} × {selected.resY} px</div>
       <div><strong>Total resolution:</strong> {totalWidthPx} × {totalHeightPx} px</div>
-      <div><strong>Power / panel:</strong> {selected.power} W</div>
-      <div><strong>Weight / panel:</strong> {selected.weightKg} kg</div>
+  <div><strong>Power / panel:</strong> {selected.power} W</div>
+  <div><strong>Weight / panel:</strong> {selected.weightKg} kg</div>
+  <div><strong>Ports needed:</strong> {portsNeeded}</div>
     </div>
   </div>
 
