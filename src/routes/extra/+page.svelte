@@ -33,9 +33,9 @@
   $: totalPixels = totalWidthPx * totalHeightPx;
   $: totalPanels = $width * $height;
   $: totalPower = totalPanels * selected.power;
-  // highlight when total pixels exceed single-port threshold (782k)
+  // dynamic note: how many whole ports are exceeded by total pixels
   const pixelThreshold = 782000;
-  $: needsMoreThanOnePort = totalPixels >= pixelThreshold;
+  $: portsOver = Math.floor(totalPixels / pixelThreshold);
   // ports needed (total pixels divided by per-port pixel budget)
   $: portsNeeded = Math.ceil(totalPixels / Math.max(1, perPortPixelBudget));
 
@@ -96,11 +96,11 @@
       <div><strong>Total resolution:</strong> {totalWidthPx} × {totalHeightPx} px</div>
       <div>
         <strong>Total pixels:</strong>
-        <span class={needsMoreThanOnePort ? 'text-red-600 font-semibold' : ''} style={needsMoreThanOnePort ? 'color:#dc2626;font-weight:600;' : ''}>
+        <span class={portsOver >= 1 ? 'text-red-600 font-semibold' : ''} style={portsOver >= 1 ? 'color:#dc2626;font-weight:600;' : ''}>
           {totalPixels.toLocaleString()}
         </span>
-        {#if needsMoreThanOnePort}
-          <span class="text-red-600" style="color:#dc2626;"> (More than one port)</span>
+        {#if portsOver >= 1}
+          <span class="text-red-600" style="color:#dc2626;"> (More than {portsOver} port{portsOver > 1 ? 's' : ''})</span>
         {/if}
       </div>
   <div><strong>Power / panel:</strong> {selected.power} W</div>

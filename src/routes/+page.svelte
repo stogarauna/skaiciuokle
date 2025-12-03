@@ -23,9 +23,9 @@
 	// total pixels
 	$: totalPixels = totalWidthPx * totalHeightPx;
 
-	// threshold indicator for ports: highlight when >= 782,000 pixels
+	// threshold indicator for ports: compute how many whole ports are exceeded
 	const pixelThreshold = 782000;
-	$: moreThanOnePort = totalPixels >= pixelThreshold;
+	$: portsOver = Math.floor(totalPixels / pixelThreshold);
 
 	// physical dimensions
 	$: totalWidthM = $width * selected.widthM;
@@ -114,11 +114,11 @@
 		<p><strong>Aspect Ratio:</strong> {aspectRatio}</p>
 		<p>
 			<strong>Total Pixels:</strong>
-			<span class={moreThanOnePort ? 'font-semibold' : ''} style={moreThanOnePort ? 'color:#dc2626;font-weight:600;' : ''}>
+			<span class={portsOver >= 1 ? 'font-semibold' : ''} style={portsOver >= 1 ? 'color:#dc2626;font-weight:600;' : ''}>
 				{totalPixels.toLocaleString()}
 			</span>
-			{#if moreThanOnePort}
-				<span style="color:#dc2626;"> (More than one port)</span>
+			{#if portsOver >= 1}
+				<span style="color:#dc2626;"> (More than {portsOver} port{portsOver > 1 ? 's' : ''})</span>
 			{/if}
 		</p>
 		<p>
