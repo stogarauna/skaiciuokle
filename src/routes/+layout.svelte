@@ -1,6 +1,6 @@
 <script>
 	// footer shows static version string to avoid importing package.json (which breaks Vite FS allow)
-	const version = '2.0.0';
+		const version = '2.0.1';
 	// If you want to wire this dynamically later, expose VITE_APP_VERSION via env and read import.meta.env.VITE_APP_VERSION
 </script>
 
