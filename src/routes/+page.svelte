@@ -1,6 +1,7 @@
 <script>
 // @ts-nocheck
 	import { selectedIndex, width, height, panelsData } from "$lib/stores";
+	import { DEFAULT_PER_PORT_PIXEL_BUDGET } from "$lib/utils/processorCalculations.js";
 
 	// derive selected panel from the selectedIndex store
 	$: selected = ($panelsData && $panelsData.length > 0) ? $panelsData[$selectedIndex] : {
@@ -31,9 +32,8 @@
 	// total pixels
 	$: totalPixels = totalWidthPx * totalHeightPx;
 
-	// threshold indicator for ports: compute how many whole ports are exceeded
-	const pixelThreshold = 782000;
-	$: portsOver = Math.floor(totalPixels / pixelThreshold);
+	// ports needed using unified per-port pixel budget
+	$: portsNeeded = Math.ceil(totalPixels / Math.max(1, DEFAULT_PER_PORT_PIXEL_BUDGET));
 
 	// physical dimensions
 	$: totalWidthM = $width * selected.widthM;
@@ -123,12 +123,10 @@
 		<p><strong>Aspect Ratio:</strong> {aspectRatio}</p>
 		<p>
 			<strong>Total Pixels:</strong>
-			<span class={portsOver >= 1 ? 'font-semibold' : ''} style={portsOver >= 1 ? 'color:#dc2626;font-weight:600;' : ''}>
-				{totalPixels.toLocaleString()}
-			</span>
-			{#if portsOver >= 1}
-				<span style="color:#dc2626;"> (More than {portsOver} port{portsOver > 1 ? 's' : ''})</span>
-			{/if}
+			<span>{totalPixels.toLocaleString()}</span>
+		</p>
+		<p>
+			<strong>Portai:</strong> {portsNeeded}
 		</p>
 		<p>
 			<strong>Wall Size:</strong> {totalWidthM.toFixed(2)} m × {totalHeightM.toFixed(2)} m
