@@ -45,19 +45,25 @@ You can preview the production build with `npm run preview`.
 
 	- name, resX, resY, widthM, heightM, power, weightKg
 
-## Deploy (Vercel + GitHub)
+## CI/CD — Auto Deploys (GitHub ↔ Vercel)
 
-- Adapter: The project uses `@sveltejs/adapter-vercel` in [svelte.config.js](svelte.config.js).
-- GitHub: Push to `main` triggers Vercel deployment when the repo is connected.
-- Connect on Vercel:
-	- New Project → Import Git Repository → select your repo.
-	- Framework auto-detect: SvelteKit. Build: `npm run build`.
-- CLI (optional):
+- Adapter: Uses `@sveltejs/adapter-vercel` in [svelte.config.js](svelte.config.js).
+- Workflows: 
+	- CI checks: [./.github/workflows/ci.yml](.github/workflows/ci.yml)
+	- Prod deploy on push to `main`: [./.github/workflows/deploy.yml](.github/workflows/deploy.yml)
+	- Preview deploys on PRs: [./.github/workflows/preview.yml](.github/workflows/preview.yml)
 
-```bash
-npm i -D vercel
-npx vercel
-npx vercel --prod
-```
+### Option A — Vercel Git Integration (recommended)
+- In Vercel Dashboard: New Project → Import GitHub → select `stogarauna/skaiciuokle`.
+- Framework preset: SvelteKit. Build command: `npm run build`. Output: `.vercel/output`.
+- Every push to `main` auto-deploys; PRs get preview deployments.
 
-- Extra link: The footer contains a link to the Extra page for quick access.
+### Option B — GitHub Actions + Vercel CLI
+Add these GitHub repository secrets (Settings → Secrets and variables → Actions):
+- `VERCEL_TOKEN`: Vercel Account → Tokens
+- `VERCEL_ORG_ID`: From `.vercel/project.json` or Vercel dashboard
+- `VERCEL_PROJECT_ID`: From `.vercel/project.json` or Vercel dashboard
+
+Then pushes to `main` will run `vercel pull`, `vercel build`, and `vercel deploy --prebuilt --prod` automatically.
+Pull requests will deploy non-prod previews.
+

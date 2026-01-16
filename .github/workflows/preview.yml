@@ -1,12 +1,11 @@
-name: Deploy to Vercel
+name: Preview Deploy
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
-  deploy:
+  preview:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,8 +20,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Pull Vercel Project Settings (production)
-        run: npx vercel pull --yes --environment=production --token $VERCEL_TOKEN
+      - name: Pull Vercel Project Settings (preview)
+        run: npx vercel pull --yes --environment=preview --token $VERCEL_TOKEN
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -33,7 +32,8 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
-      - name: Deploy (prebuilt) to Production
-        run: npx vercel deploy --prebuilt --prod --token $VERCEL_TOKEN
+      - name: Deploy (prebuilt) to Preview
+        id: deploy
+        run: npx vercel deploy --prebuilt --token $VERCEL_TOKEN
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
