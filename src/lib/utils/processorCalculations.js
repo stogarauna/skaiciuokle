@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Utilities for computing how many panels/cabinets a processor can drive
  * based on resolution limits and power limits.

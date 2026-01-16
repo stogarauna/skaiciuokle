@@ -1,7 +1,26 @@
 <script>
+	import { onMount } from 'svelte';
+	import { panelsData } from '$lib/stores';
+	import { parsePanelsExcel } from '$lib/utils/excelLoader.js';
+
 	// footer shows static version string to avoid importing package.json (which breaks Vite FS allow)
-		const version = '2.0.1';
+		const version = '2.1.0';
 	// If you want to wire this dynamically later, expose VITE_APP_VERSION via env and read import.meta.env.VITE_APP_VERSION
+
+	// Preload panels.xlsx from static if present
+	onMount(async () => {
+		try {
+			const res = await fetch('/panels.xlsx');
+			if (!res.ok) return;
+			const buf = await res.arrayBuffer();
+			const parsed = await parsePanelsExcel(buf);
+			if (Array.isArray(parsed) && parsed.length > 0) {
+				panelsData.set(parsed);
+			}
+		} catch (err) {
+			// ignore if not available
+		}
+	});
 </script>
 
 <!-- Navigation removed by request -->

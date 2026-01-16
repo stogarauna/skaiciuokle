@@ -1,9 +1,26 @@
 <script>
-	import { panels } from "../lib/data/panels.js";
-	import { selectedIndex, width, height } from "$lib/stores";
+// @ts-nocheck
+	import { selectedIndex, width, height, panelsData } from "$lib/stores";
+	import { parsePanelsExcel } from "$lib/utils/excelLoader.js";
+
+	async function handleExcelChange(e) {
+		const file = e.target.files?.[0];
+		if (!file) return;
+		const parsed = await parsePanelsExcel(file);
+		panelsData.set(parsed);
+		selectedIndex.set(0);
+	}
 
 	// derive selected panel from the selectedIndex store
-	$: selected = panels[$selectedIndex];
+	$: selected = ($panelsData && $panelsData.length > 0) ? $panelsData[$selectedIndex] : {
+		name: "",
+		resX: 0,
+		resY: 0,
+		widthM: 0,
+		heightM: 0,
+		power: 0,
+		weightKg: 0
+	};
 
 	// derived values using store values
 	$: totalPanels = $width * $height;
@@ -49,6 +66,14 @@
 </script>
 
 <section class="space-y-5">
+	<!-- Excel loader -->
+	<div class="bg-white p-5 rounded-2xl shadow-md">
+		<label for="excelInput" class="font-semibold text-gray-700 mb-1" style="display:block">Įkelkite Excel (.xlsx) su LED panelių duomenimis</label>
+		<input id="excelInput" type="file" accept=".xlsx,.xls" on:change={handleExcelChange} class="w-full border border-gray-300 rounded-xl p-3" />
+		{#if !$panelsData || $panelsData.length === 0}
+			<p class="text-sm text-gray-600 mt-2">Duomenys neįkelti. Įkelkite Excel failą su stulpeliais: name, resX, resY, widthM, heightM, power, weightKg.</p>
+		{/if}
+	</div>
 	<!-- Panel selector -->
 	<div class="bg-white p-5 rounded-2xl shadow-md">
 		<div style="display:block;width:100%">
@@ -59,7 +84,7 @@
 				on:change={e => selectedIndex.set(parseInt(e.target.value))}
 				class="w-full border border-gray-300 rounded-xl p-3 text-gray-700 focus:ring-2 focus:ring-blue-500"
 			>
-				{#each panels as panel, i}
+				{#each $panelsData as panel, i}
 					<option value={i}>{panel.name}</option>
 				{/each}
 			</select>

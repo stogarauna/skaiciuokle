@@ -37,3 +37,11 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+## Excel Data Import (Panels)
+
+- Upload an Excel file (`.xlsx/.xls`) in the app to populate LED panel models.
+- Expected headers on the first sheet:
+	- name, resX, resY, widthM, heightM, power, weightKg
+- After upload, the panel selector will list the rows from the Excel.
+- To use: open the app, click the upload control, choose your Excel file.

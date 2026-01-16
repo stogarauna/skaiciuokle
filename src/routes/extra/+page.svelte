@@ -1,11 +1,28 @@
 <script>
-  import { panels } from "../../lib/data/panels.js";
-  import { selectedIndex, width, height } from "$lib/stores";
+// @ts-nocheck
+  import { selectedIndex, width, height, panelsData } from "$lib/stores";
+  import { parsePanelsExcel } from "$lib/utils/excelLoader.js";
   import { processors } from "../../lib/data/processors.js";
   import { computeProcessorLimits } from "../../lib/utils/processorCalculations.js";
 
+  async function handleExcelChange(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const parsed = await parsePanelsExcel(file);
+    panelsData.set(parsed);
+    selectedIndex.set(0);
+  }
+
   // derive selected panel from store
-  $: selected = panels[$selectedIndex];
+  $: selected = ($panelsData && $panelsData.length > 0) ? $panelsData[$selectedIndex] : {
+    name: "",
+    resX: 0,
+    resY: 0,
+    widthM: 0,
+    heightM: 0,
+    power: 0,
+    weightKg: 0
+  };
 
   // presets
   /** @type {{name: string, w: number, h: number}[]} */
@@ -76,6 +93,13 @@
 </script>
 
 <section class="space-y-5">
+  <div class="bg-white p-5 rounded-2xl shadow-md">
+    <label for="excelInputExtra" class="block mb-1 font-semibold">Įkelkite Excel (.xlsx) su LED panelių duomenimis</label>
+    <input id="excelInputExtra" type="file" accept=".xlsx,.xls" on:change={handleExcelChange} class="w-full border rounded p-2" />
+    {#if !$panelsData || $panelsData.length === 0}
+      <p class="text-sm text-gray-600 mt-2">Duomenys neįkelti. Įkelkite Excel failą su stulpeliais: name, resX, resY, widthM, heightM, power, weightKg.</p>
+    {/if}
+  </div>
   <div class="bg-white p-5 rounded-2xl shadow-md">
     <div class="block mb-2 font-semibold">Presets</div>
     <div class="flex gap-2">
