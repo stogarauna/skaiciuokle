@@ -109,7 +109,7 @@
       </div>
   <div><strong>Power / panel:</strong> {selected.power} W</div>
   <div><strong>Weight / panel:</strong> {selected.weightKg} kg</div>
-  <div><strong>Portai:</strong> {portsNeeded}</div>
+  <div><strong>Main portai:</strong> {portsNeeded}</div>
     </div>
   </div>
 

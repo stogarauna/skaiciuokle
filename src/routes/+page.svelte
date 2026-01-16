@@ -126,7 +126,7 @@
 			<span>{totalPixels.toLocaleString()}</span>
 		</p>
 		<p>
-			<strong>Portai:</strong> {portsNeeded}
+			<strong>Main portai:</strong> {portsNeeded}
 		</p>
 		<p>
 			<strong>Wall Size:</strong> {totalWidthM.toFixed(2)} m × {totalHeightM.toFixed(2)} m
