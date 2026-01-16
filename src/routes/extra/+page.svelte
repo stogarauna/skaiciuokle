@@ -115,7 +115,7 @@
 
   <!-- Per-port power and processor selection -->
   <div class="bg-white p-5 rounded-2xl shadow-md grid grid-cols-1 gap-4">
-    <div class="flex items-center gap-4">
+    <div class="grid grid-cols-1 gap-4">
       <div>
         <label for="perPortPower" class="block mb-1 font-semibold">Per-port power (W)</label>
         <input id="perPortPower" type="number" class="border rounded p-1 w-32" bind:value={perPortPowerW} />
