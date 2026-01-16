@@ -154,3 +154,8 @@
 		<p><strong>Total Weight:</strong> {weightDisplay}</p>
 	</div>
 </section>
+
+<div class="mt-4 flex justify-center">
+	<a href="/extra" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Eiti į Extra puslapį</a>
+  
+</div>
