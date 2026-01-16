@@ -94,6 +94,9 @@
 
 <section class="space-y-5">
   <div class="bg-white p-5 rounded-2xl shadow-md">
+    <a href="/" class="inline-block px-3 py-2 bg-gray-800 text-white rounded hover:bg-gray-900">Grįžti į pagrindinį puslapį</a>
+  </div>
+  <div class="bg-white p-5 rounded-2xl shadow-md">
     <label for="excelInputExtra" class="block mb-1 font-semibold">Įkelkite Excel (.xlsx) su LED panelių duomenimis</label>
     <input id="excelInputExtra" type="file" accept=".xlsx,.xls" on:change={handleExcelChange} class="w-full border rounded p-2" />
     {#if !$panelsData || $panelsData.length === 0}
