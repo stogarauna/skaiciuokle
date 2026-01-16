@@ -31,6 +31,7 @@
 	</div>
 
 	<footer class="text-center text-gray-500 mt-6">
-		LED Skaičiuoklė © 2025 · v{version}
+		LED Skaičiuoklė © 2025 · v{version} · 
+		<a href="https://skaiciuokle-topaz.vercel.app/extra" class="text-blue-600 hover:underline">Extra</a>
 	</footer>
 </main>
