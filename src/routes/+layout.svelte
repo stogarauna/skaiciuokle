@@ -31,7 +31,7 @@
 	</div>
 
 	<footer class="text-center text-gray-500 mt-6">
-		<div>LED Skaičiuoklė © 2025 · v{version}</div>
-		<a href="/extra" class="inline-block mt-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">Extra</a>
+		<a href="/extra" class="inline-block px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">Extra</a>
+		<div class="mt-2">LED Skaičiuoklė © 2026 · v{version}</div>
 	</footer>
 </main>
