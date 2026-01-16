@@ -2,7 +2,7 @@
 // @ts-nocheck
   import { selectedIndex, width, height, panelsData } from "$lib/stores";
   import { processors } from "../../lib/data/processors.js";
-  import { computeProcessorLimits } from "../../lib/utils/processorCalculations.js";
+  import { computeProcessorLimits, DEFAULT_PER_PORT_PIXEL_BUDGET } from "../../lib/utils/processorCalculations.js";
 
   // derive selected panel from store
   $: selected = ($panelsData && $panelsData.length > 0) ? $panelsData[$selectedIndex] : {
@@ -41,10 +41,7 @@
   $: totalPixels = totalWidthPx * totalHeightPx;
   $: totalPanels = $width * $height;
   $: totalPower = totalPanels * selected.power;
-  // dynamic note: how many whole ports are exceeded by total pixels
-  const pixelThreshold = 782000;
-  $: portsOver = Math.floor(totalPixels / pixelThreshold);
-  // ports needed (total pixels divided by per-port pixel budget)
+  // ports needed (total pixels divided by unified per-port pixel budget)
   $: portsNeeded = Math.ceil(totalPixels / Math.max(1, perPortPixelBudget));
 
   function exportCSV() {
@@ -74,8 +71,8 @@
   $: processor = processors[processorIndex];
 
   // computed limits
-  // allow configuring per-port pixel budget (default 780k)
-  let perPortPixelBudget = 780000;
+  // allow configuring per-port pixel budget (default from utils)
+  let perPortPixelBudget = DEFAULT_PER_PORT_PIXEL_BUDGET;
   $: limits = computeProcessorLimits(processor, selected, { perPortPixelBudget });
 
   // editable per-port power budget (W)
@@ -108,16 +105,11 @@
       <div><strong>Total resolution:</strong> {totalWidthPx} × {totalHeightPx} px</div>
       <div>
         <strong>Total pixels:</strong>
-        <span class={portsOver >= 1 ? 'text-red-600 font-semibold' : ''} style={portsOver >= 1 ? 'color:#dc2626;font-weight:600;' : ''}>
-          {totalPixels.toLocaleString()}
-        </span>
-        {#if portsOver >= 1}
-          <span class="text-red-600" style="color:#dc2626;"> (More than {portsOver} port{portsOver > 1 ? 's' : ''})</span>
-        {/if}
+        <span>{totalPixels.toLocaleString()}</span>
       </div>
   <div><strong>Power / panel:</strong> {selected.power} W</div>
   <div><strong>Weight / panel:</strong> {selected.weightKg} kg</div>
-  <div><strong>Ports needed:</strong> {portsNeeded}</div>
+  <div><strong>Portai:</strong> {portsNeeded}</div>
     </div>
   </div>
 
