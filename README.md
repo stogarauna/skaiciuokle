@@ -40,8 +40,21 @@ You can preview the production build with `npm run preview`.
 
 ## Excel Data Import (Panels)
 
-- Upload an Excel file (`.xlsx/.xls`) in the app to populate LED panel models.
-- Expected headers on the first sheet:
 	- name, resX, resY, widthM, heightM, power, weightKg
-- After upload, the panel selector will list the rows from the Excel.
-- To use: open the app, click the upload control, choose your Excel file.
+
+## Deploy (Vercel + GitHub)
+
+- Adapter: The project uses `@sveltejs/adapter-vercel` in [svelte.config.js](svelte.config.js).
+- GitHub: Push to `main` triggers Vercel deployment when the repo is connected.
+- Connect on Vercel:
+	- New Project → Import Git Repository → select your repo.
+	- Framework auto-detect: SvelteKit. Build: `npm run build`.
+- CLI (optional):
+
+```bash
+npm i -D vercel
+npx vercel
+npx vercel --prod
+```
+
+- Extra link: The footer contains a link to the Extra page for quick access.
