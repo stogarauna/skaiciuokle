@@ -1,4 +1,7 @@
 # skaiciuokle — v2
+
+[Live site](https://skaiciuokle-topaz.vercel.app) · [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository=https://github.com/stogarauna/skaiciuokle)
+
 # sv
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
